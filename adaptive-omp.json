@@ -1,0 +1,216 @@
+{
+	"$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+	"console_title_template": "{{ .Shell }} in {{ .Folder }}",
+	"blocks": [
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"type": "os",
+					"style": "diamond",
+					"leading_diamond": "",
+					"template": " {{ .Icon }}  ",
+					"foreground_templates": ["{{ .Env.ACCENT_COLOR }}"],
+					"trailing_diamond": "",
+					"foreground": "p:terminal:background",
+					"background": "p:terminal:bright-black"
+				},
+				{
+					"cache_duration": "none",
+					"foreground_templates": ["{{ .Env.ACCENT_FONT }}"],
+					"background_templates": ["{{  .Env.ACCENT_COLOR }}"],
+					"type": "shell",
+					"template": " {{ .Shell }} ",
+					"style": "diamond",
+					"trailing_diamond": ""
+				}
+			]
+		},
+		{
+			"type": "prompt",
+			"alignment": "right",
+			"segments": [
+				{
+					"cache_duration": "none",
+					"time_format": "15:04:05",
+					"template": " \uf017 {{ .CurrentDate | date .Format }} ",
+					"foreground": "p:terminal:foreground",
+					"background_templates": [],
+					"foreground_templates": ["{{ .Env.ACCENT_COLOR }}"],
+					"type": "time",
+					"style": "plain",
+					"trailing_diamond": ""
+				},
+				{
+					"cache_duration": "none",
+					"charged_icon": "\uf240 ",
+					"charging_icon": "\uf1e6 ",
+					"discharging_icon": "\uf242 ",
+					"template": " {{ if not .Error }}{{ if ge .Percentage 90 }}\uf240{{ else if ge .Percentage 70 }}\uf241{{ else if ge .Percentage 50 }}\uf242{{ else if ge .Percentage 30 }}\uf243{{ else }}\uf244{{ end }} {{ end }}",
+					"type": "battery",
+					"style": "plain",
+					"foreground_templates": [
+						"{{ if lt .Percentage 30 }}p:terminal:red{{ end }}",
+						"{{ if and (ge .Percentage 30) (lt .Percentage 70) }}p:terminal:yellow{{ end }}",
+						"{{ .Env.ACCENT_COLOR }}"
+					]
+				}
+			]
+		},
+		{
+			"newline": true,
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"type": "os",
+					"style": "diamond",
+					"leading_diamond": "",
+					"template": "   ",
+					"foreground_templates": ["{{ .Env.ACCENT_COLOR }}"],
+					"trailing_diamond": "\ue0b0",
+					"foreground": "p:terminal:background",
+					"background": "p:terminal:bright-black"
+				},
+			{
+					"cache_duration": "none",
+					"folder_separator_icon": " \ue0b1 ",
+					"options": {
+						"max_depth": 1,
+						"mapped_locations": {
+						  "/home/*": ""
+						},
+						"hide_root_location": true,
+						"folder_icon": " \ue0b1 "
+					},
+					"style": "diamond",
+					"leading_diamond": "",
+					"type": "path",
+					"trailing_diamond": "\ue0b0",
+					"foreground_templates": ["{{ .Env.ACCENT_FONT }}"],
+					"background_templates": ["{{ .Env.ACCENT_COLOR }}"]
+				},
+				{
+					"type": "git",
+					"branch_icon": "",
+					"fetch_status": true,
+					"fetch_upstream_icon": true,
+					"cache_duration": "none",
+					"template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }}{{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} ",
+					"trailing_diamond": "\ue0b0",
+					"style": "diamond",
+					"foreground_templates": ["{{ .Env.ACCENT_DIM_FONT }}"],
+					"background_templates": ["{{ .Env.ACCENT_DIM }}"]
+				}
+			]
+		},
+		{
+			"type": "prompt",
+			"alignment": "right",
+			"segments": [
+				{
+					"options": {
+						"style": "austin"
+					},
+					"template": "{{ .FormattedMs }}  \uf252 ",
+					"foreground_templates": ["{{ .Env.ACCENT_COLOR }}"],
+					"type": "executiontime",
+					"style": "plain"
+				}
+			]
+		},
+		{
+			"newline": true,
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"options": {
+						"cache_duration": "none"
+					},
+					"template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}",
+					"foreground": "p:terminal:green",
+					"type": "node",
+					"style": "plain"
+				},
+				{
+					"options": {
+						"cache_duration": "none"
+					},
+					"template": " \ue235 {{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}",
+					"foreground": "p:terminal:blue",
+					"type": "python",
+					"style": "plain"
+				},
+				{
+					"options": {
+						"cache_duration": "none"
+					},
+					"template": " \ue7a8 {{ .Full }}",
+					"foreground": "p:terminal:red",
+					"type": "rust",
+					"style": "plain"
+				},
+				{
+					"options": {
+						"cache_duration": "none"
+					},
+					"template": " \ue627 {{ .Full }}",
+					"foreground": "p:terminal:cyan",
+					"type": "go",
+					"style": "plain"
+				}
+			]
+		},
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"cache_duration": "none",
+					"display_host": true,
+					"template": " {{ if .SSHSession }}\\uf817 {{ end }} {{ .UserName }} ",
+					"foreground_templates": ["{{ .Env.ACCENT_COLOR }}"],
+					"type": "session",
+					"style": "plain"
+				},
+				{
+					"type": "text",
+					"options": {
+						"cache_duration": "none"
+					},
+					"foreground_templates": [
+						"{{ if ne .Code 0 }}p:terminal:red{{ else }}{{ .Env.ACCENT_COLOR }}{{ end }}"
+					],
+					"background_templates": [],
+					"template": "",
+					"style": "plain"
+				}
+			],
+			"newline": true
+		}
+	],
+	"version": 3,
+	"final_space": true,
+	"palette": {
+		"terminal:background": "#282c34",
+		"terminal:foreground": "#abb2bf",
+		"terminal:black": "#282c34",
+		"terminal:red": "#e06c75",
+		"terminal:green": "#98c379",
+		"terminal:yellow": "#e5c07b",
+		"terminal:blue": "#61afef",
+		"terminal:magenta": "#c678dd",
+		"terminal:cyan": "#56b6c2",
+		"terminal:white": "#abb2bf",
+		"terminal:bright-black": "#383e4a",
+		"terminal:bright-red": "#e06c75",
+		"terminal:bright-green": "#98c379",
+		"terminal:bright-yellow": "#e5c07b",
+		"terminal:bright-blue": "#61afef",
+		"terminal:bright-magenta": "#c678dd",
+		"terminal:bright-cyan": "#56b6c2",
+		"terminal:bright-white": "#ffffff"
+	}
+}
