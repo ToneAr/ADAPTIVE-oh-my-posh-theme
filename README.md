@@ -35,7 +35,6 @@ $accentValue = Get-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\DWM'
       
       [System.Environment]::SetEnvironmentVariable('ACCENT_COLOR', $hex, 'Process')
       [System.Environment]::SetEnvironmentVariable('ACCENT_DIM', $hexDim, 'Process')
-      Write-Output $hex
     }
 ```
 
