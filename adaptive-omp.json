@@ -75,14 +75,28 @@
         },
         {
           "cache_duration": "none",
-          "folder_separator_icon": " \ue0b1 ",
           "options": {
-            "max_depth": 1,
+            "style": "agnoster_short",
+            "folder_separator_icon": " \ue0b1 ",
+            "max_depth": 3,
+            "home_icon": "\uf015 ~",
+            "folder_icon": "\uf141",
+            "hide_root_location": false,
             "mapped_locations": {
-              "/home/*": ""
-            },
-            "hide_root_location": true,
-            "folder_icon": " \ue0b1 "
+              "/": "\uf0a0 /",
+              "~/Desktop": "\uf108 Desktop",
+              "~/Documents": "\uf15c Documents",
+              "~/Downloads": "\uf019 Downloads",
+              "~/Pictures": "\uf03e Pictures",
+              "~/Music": "\uf001 Music",
+              "~/Videos": "\uf03d Videos",
+              "~/repos": "\uf121 repos",
+              "~/.config": "\uf013 config",
+              "~/.config/fish": "\uf120 fish",
+              "~/.config/nvim": "\ue7c5 nvim",
+              "/tmp": "\uf1f8 tmp",
+              "/etc": "\uf085 etc"
+            }
           },
           "style": "diamond",
           "leading_diamond": "",
